@@ -1,6 +1,7 @@
 package com.example.ComuniAlert.model;
 
 
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +16,7 @@ public class Pessoa {
     Sexo sexo;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dtNascimento;
+    @Email(message = "O campo Email deve possuir um email valido")
     private String email;
     private String telefone;
 }
