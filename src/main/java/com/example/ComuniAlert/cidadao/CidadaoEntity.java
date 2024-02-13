@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.UUID;
 
@@ -14,8 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "tb_cidadaos")
-@Table
-public class CidadaoModel extends Pessoa {
+public class CidadaoEntity extends Pessoa {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -26,11 +26,14 @@ public class CidadaoModel extends Pessoa {
     private CondicaoDeSaude condicaoDeSaude;
     ParentescoFamiliar parentescoFamiliar;
     @Column(unique = true)
+    @Length(min = 9, max = 9)
     private String identidade;
     @Column(unique = true)
+    @Length(min = 15, max = 15)
     private String cns;  //cartao sus
     private String nomeDaMae;
     private String nomeDoPai;
     @Column(unique = true)
+    @Length(min = 11, max = 11)
     private String cpf;
 }

@@ -1,7 +1,8 @@
-package com.example.ComuniAlert.model;
+package com.example.ComuniAlert.familia;
 
 
-import com.example.ComuniAlert.cidadao.CidadaoModel;
+import com.example.ComuniAlert.cidadao.CidadaoEntity;
+import com.example.ComuniAlert.model.Endereco;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,12 +22,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Familia {
+public class FamiliaEntity {
     private boolean isAtiva;
     Endereco endereco;
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
-    List<CidadaoModel> familia = new ArrayList<>();
+    List<CidadaoEntity> familia = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime dataDoCadastroFamiliar;
     private int area, microArea;
