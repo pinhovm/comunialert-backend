@@ -2,6 +2,7 @@ package com.example.ComuniAlert.cidadao;
 
 
 import com.example.ComuniAlert.cidadao.CidadaoEntity;
+import com.example.ComuniAlert.exceptions.CidadaoExistsException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +12,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cidadaos")
 public class CidadaoController {
+
     @Autowired
     private CidadaoRepository cidadaoRepository;
 
-
     @PostMapping("/")
     public CidadaoEntity createCidadao(@Valid @RequestBody CidadaoEntity cidadaoEntity){
+        this.cidadaoRepository
+        .findByCnsOrCpf(cidadaoEntity.getCns(), cidadaoEntity.getCpf())
+        .ifPresent((cidadao)-> {
+            throw new CidadaoExistsException();
+        });
         return this.cidadaoRepository.save(cidadaoEntity);
-
     }
+
+
 }

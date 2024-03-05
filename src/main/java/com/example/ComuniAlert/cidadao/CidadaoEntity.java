@@ -26,7 +26,6 @@ public class CidadaoEntity extends Pessoa {
     private CondicaoDeSaude condicaoDeSaude;
     ParentescoFamiliar parentescoFamiliar;
     @Column(unique = true)
-    @Length(min = 9, max = 9)
     private String identidade;
     @Column(unique = true)
     @Length(min = 15, max = 15)
