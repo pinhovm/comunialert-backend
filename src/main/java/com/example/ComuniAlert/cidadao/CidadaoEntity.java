@@ -18,7 +18,7 @@ import java.util.UUID;
 public class CidadaoEntity extends Pessoa {
 
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private long familiaId;
     private boolean isChefeDeFamilia;
