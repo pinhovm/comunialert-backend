@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface CidadaoRepository extends JpaRepository<CidadaoEntity, UUID> {
     Optional<CidadaoEntity> findByCnsOrCpf(String cns, String cpf);
+
+    CidadaoEntity findByCpf(String cpf);
 }
