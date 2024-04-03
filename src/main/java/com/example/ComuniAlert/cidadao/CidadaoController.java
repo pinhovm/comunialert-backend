@@ -1,7 +1,6 @@
 package com.example.ComuniAlert.cidadao;
 
 
-import com.example.ComuniAlert.cidadao.CidadaoEntity;
 import com.example.ComuniAlert.exceptions.CidadaoExistsException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 //github copilot please do create functions to search for Cidadao atraves de uma chave unica chamada CPF
 
@@ -23,23 +23,35 @@ public class CidadaoController {
     @PostMapping("/")
     public CidadaoEntity createCidadao(@Valid @RequestBody CidadaoEntity cidadaoEntity){
         this.cidadaoRepository
-        .findByCnsOrCpf(cidadaoEntity.getCns(), cidadaoEntity.getCpf())
-        .ifPresent((cidadao)-> {
-            throw new CidadaoExistsException();
+            .findByCns(cidadaoEntity.getCns())
+                .ifPresent((cidadao)-> {
+            throw new CidadaoExistsException("CNS já cadastrado");
         });
+        this.cidadaoRepository
+            .findByCpf(cidadaoEntity.getCpf())
+                .ifPresent((cidadao)-> {
+                    throw new CidadaoExistsException("CPF já cadastrado");
+                });
+        //salva o cidadao caso nao haja cpf ou
         return this.cidadaoRepository.save(cidadaoEntity);
     }
 
     //buscar cidadao com um parametro especifico -> cpf
     @GetMapping("/buscar")
-    public ResponseEntity<CidadaoEntity> searchCidadao (@RequestParam String cpf){
-        CidadaoEntity cidadao = cidadaoRepository.findByCpf(cpf);
-        if(cidadao != null){
+    public ResponseEntity<Optional<CidadaoEntity>> searchCidadao (@RequestParam String key) {
+        Optional<CidadaoEntity> cidadao = null;
+        if (key.length() == 11) {
+            cidadao = cidadaoRepository.findByCpf(key);
+        } else if (key.length() == 15) {
+            cidadao = cidadaoRepository.findByCns(key);
+        }
+        if (cidadao != null) {
             return ResponseEntity.ok(cidadao);
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
 
     //retorna todos os cidadaos
     @GetMapping("/home")

@@ -1,9 +1,11 @@
 package com.example.ComuniAlert.cidadao;
 
+import com.example.ComuniAlert.familia.FamiliaEntity;
 import com.example.ComuniAlert.model.CondicaoDeSaude;
 import com.example.ComuniAlert.model.ParentescoFamiliar;
 import com.example.ComuniAlert.model.Pessoa;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,19 +22,23 @@ public class CidadaoEntity extends Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private long familiaId;
+    @ManyToOne
+    @JoinColumn(name = "familia_id") // Nome da coluna que representa o relacionamento no banco de dados
+    private FamiliaEntity familia;
     private boolean isChefeDeFamilia;
     @Embedded
     private CondicaoDeSaude condicaoDeSaude;
-    ParentescoFamiliar parentescoFamiliar;
-    @Column(unique = true)
+    private ParentescoFamiliar parentescoFamiliar;
+    @NotNull
     private String identidade;
-    @Column(unique = true)
+    @NotNull
     @Length(min = 15, max = 15)
     private String cns;  //cartao sus
     private String nomeDaMae;
     private String nomeDoPai;
-    @Column(unique = true)
     @Length(min = 11, max = 11)
+    @NotNull
     private String cpf;
+
+
 }
