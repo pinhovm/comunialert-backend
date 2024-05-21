@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CidadaoRepository extends JpaRepository<CidadaoEntity, UUID> {
-    Optional<CidadaoEntity> findByCnsOrCpf(String cns, String cpf);
+    Optional<CidadaoEntity> findByCns(String cns);
 
-    CidadaoEntity findByCpf(String cpf);
+    Optional<CidadaoEntity> findByCpf(String cpf);
 }

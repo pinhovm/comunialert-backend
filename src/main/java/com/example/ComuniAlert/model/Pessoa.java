@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity
+@Entity(name = "tb_pessoa")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Pessoa {
 
