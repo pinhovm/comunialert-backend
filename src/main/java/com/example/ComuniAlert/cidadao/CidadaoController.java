@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-//github copilot please do create functions to search for Cidadao atraves de uma chave unica chamada CPF
-
 @RestController
 @RequestMapping("/cidadaos")
 public class CidadaoController {
@@ -32,7 +30,7 @@ public class CidadaoController {
                 .ifPresent((cidadao)-> {
                     throw new CidadaoExistsException("CPF já cadastrado");
                 });
-        //salva o cidadao caso nao haja cpf ou
+        //salva o cidadao caso nao haja cpf ou cns já cadastrado
         return this.cidadaoRepository.save(cidadaoEntity);
     }
 
@@ -59,5 +57,6 @@ public class CidadaoController {
         List<CidadaoEntity> cidadao = cidadaoRepository.findAll();
         return ResponseEntity.ok(cidadao);
     }
+
 
 }
