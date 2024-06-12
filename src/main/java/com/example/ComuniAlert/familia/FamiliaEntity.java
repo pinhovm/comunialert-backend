@@ -1,6 +1,7 @@
 package com.example.ComuniAlert.familia;
 
 
+import com.example.ComuniAlert.cidadao.CidadaoEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -16,17 +18,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity(name="tb_familias")
 public class FamiliaEntity {
-    private boolean isAtiva;
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id ;
-
-    private String apelido;
-
+    private String apelidoHof;
     @CreationTimestamp
     private LocalDateTime dataDoCadastroFamiliar;
     private int area, microArea;
-
     @NotNull
     private String cep;
     @NotNull
@@ -39,6 +37,9 @@ public class FamiliaEntity {
     private String estado;
     @NotNull
     private String pais;
+
+    @OneToMany(mappedBy = "familia", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CidadaoEntity> membrosFamiliares;
 
 
 }
