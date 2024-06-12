@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+src\main\java\com\example\ComuniAlert\model\ParentescoFamiliar.java
+src\main\java\com\example\ComuniAlert\model\Sexo.java

@@ -22,14 +22,13 @@ public class CidadaoEntity extends Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @ManyToOne
-    @JoinColumn(name = "familia_id") // Nome da coluna que representa o relacionamento no banco de dados
-    private FamiliaEntity familia;
-    private boolean isChefeDeFamilia;
+    //@ManyToOne
+    //@JoinColumn(name = "familia_id") // Nome da coluna que representa o relacionamento no banco de dados
+    //private FamiliaEntity familia;
+    //private boolean isChefeDeFamilia;
     @Embedded
     private CondicaoDeSaude condicaoDeSaude;
-    private ParentescoFamiliar parentescoFamiliar;
-    @NotNull
+    //private ParentescoFamiliar parentescoFamiliar;
     private String identidade;
     @NotNull
     @Length(min = 15, max = 15)

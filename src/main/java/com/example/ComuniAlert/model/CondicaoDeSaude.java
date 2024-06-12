@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Embeddable
 public class CondicaoDeSaude {
-    private boolean isGestante, isUsoDeAlcool, isUsoDeDrogas, isHipertensaoArterial,
-        isDiabetes, isAVCouDerrame, isInfarto, isDoencaCardiaca,
-        isInsuficienciaRenal, isDoencaRespiratoria, isAsma, isHanseniase,
-        isTuberculose, isCancer, isAcamado, isDomicilado;
+    private boolean isGestante, hasHipertensaoArterial,
+        hasDiabetes, hasDoencaCardiaca;
 }
